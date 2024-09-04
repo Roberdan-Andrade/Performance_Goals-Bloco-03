@@ -40,7 +40,7 @@ function FormularioCategoria() {
              retornar()
  
           } catch (error: any) {
-             alert('Erro ao atualizar o Tema')
+             alert('Erro ao atualizar o Categoria')
           }
  
        } else {
@@ -50,7 +50,7 @@ function FormularioCategoria() {
              alert('Categoria cadastrada com sucesso')
  
           } catch (error: any) {
-             alert('Erro ao cadastrado o Tema')
+             alert('Erro ao cadastrado o Categoria')
           }
        }
  

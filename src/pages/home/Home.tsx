@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom"
+import ModalProduto from "../../components/produtos/modal_produto/ModalProduto"
+
 function Home() {
     return (
         <div className="bg-cyan-600 flex justify-center min-h-[80vh]"> {/*Inicio div 1*/}
@@ -9,9 +12,8 @@ function Home() {
                     <p className="text-xl">Encontre aqui os remedios mais avançados</p>
 
                     <div className="flex justify-around gap-4">
-                        <div className="rounded border-white border-solid border-2 py-2 px-4">
-                            Ver Remedios e Produtos
-                        </div>
+                        <Link to='/produtos' className='hover:underline'>Ver Remedios e Produtos</Link>
+                        <ModalProduto />
                     </div>
                 </div> {/*Final div 3.1*/}
 
