@@ -13,12 +13,13 @@ import FormularioProduto from "./components/produtos/form_produto/FormProduto"
 import DeletarProduto from "./components/produtos/deletar_produto/DeletarProduto"
 
 import { ToastContainer } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
    return (
       <>
+      <ToastContainer />
          <BrowserRouter>
-         <ToastContainer />
             <Navbar />
             <div className="min-h-[80vh]">
                <Routes>

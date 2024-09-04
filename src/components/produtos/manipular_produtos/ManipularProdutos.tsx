@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { buscar } from "../../../services/Service";
 import { Triangle } from "react-loader-spinner";
-import { ToastAlerta } from "../../../utils/ToastAlerta";
 import CardProdutosManipular from "../card_produtos/CardProdutosManipular";
 import Produto from "../../../models/Produto";
+import { toastAlerta } from "../../../utils/ToastAlerta";
 
 function ManipularProdutos() {
    const [produtos, setProdutos] = useState<Produto[]>([]);
@@ -12,7 +12,7 @@ function ManipularProdutos() {
       try {
          await buscar('/produtos', setProdutos);
       } catch (error: any) {
-         ToastAlerta('Erro ao buscar produtos!', "Erro")
+         toastAlerta('Erro ao buscar produtos!', "Erro")
       }
    }
 

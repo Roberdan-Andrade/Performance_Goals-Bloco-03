@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { buscar, deletar } from "../../../services/Service";
 import Categoria from "../../../models/Categoria";
-import { ToastAlerta } from "../../../utils/ToastAlerta";
+import { toastAlerta } from "../../../utils/ToastAlerta";
 
 function DeletarCategoria() {
     const [categoria, setCategoria] = useState<Categoria>({} as Categoria);
@@ -28,9 +28,9 @@ function DeletarCategoria() {
     async function deletarCategoria() {
         try {
             await deletar(`/categorias/${id}`)
-            ToastAlerta('Categoria apagada com sucesso', "Sucesso")
+            toastAlerta('Categoria apagada com sucesso', "Sucesso")
         } catch (error) {
-            ToastAlerta('Erro ao apagar o Categoria', "Erro")
+            toastAlerta('Erro ao apagar o Categoria', "Erro")
         }
         retornar()
     }

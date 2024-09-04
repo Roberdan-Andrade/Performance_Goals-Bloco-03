@@ -3,7 +3,7 @@ import { buscar } from "../../../services/Service";
 import Categoria from "../../../models/Categoria";
 import CardCategorias from "../card_categorias/CardCategorias";
 import { Triangle } from "react-loader-spinner";
-import { ToastAlerta } from "../../../utils/ToastAlerta";
+import { toastAlerta } from "../../../utils/ToastAlerta";
 
 function ListaCategorias() {
     const [categorias, setCategorias] = useState<Categoria[]>([]);
@@ -12,7 +12,7 @@ function ListaCategorias() {
        try {
           await buscar('/categorias', setCategorias);
        } catch (error: any) {
-          ToastAlerta('Erro ao buscar categorias!', "Erro")
+          toastAlerta('Erro ao buscar categorias!', "Erro")
        }
     }
  

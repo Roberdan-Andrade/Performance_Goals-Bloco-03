@@ -2,7 +2,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { atualizar, buscar, cadastrar } from "../../../services/Service";
 import Categoria from "../../../models/Categoria";
-import { ToastAlerta } from "../../../utils/ToastAlerta";
+import { toastAlerta } from "../../../utils/ToastAlerta";
 
 function FormularioCategoria() {
     const [categoria, setCategoria] = useState<Categoria>({} as Categoria);
@@ -37,21 +37,21 @@ function FormularioCategoria() {
           try {
              await atualizar(`/categorias`, categoria, setCategoria)
  
-             ToastAlerta('Categoria atualizada com sucesso', "Sucesso")
+             toastAlerta('Categoria atualizada com sucesso', "Sucesso")
              retornar()
  
           } catch (error: any) {
-             ToastAlerta('Erro ao atualizar a Categoria', "Erro")
+             toastAlerta('Erro ao atualizar a Categoria', "Erro")
           }
  
        } else {
           try {
              await cadastrar(`/categorias`, categoria, setCategoria)
  
-             ToastAlerta('Categoria cadastrada com sucesso', "Sucesso")
+             toastAlerta('Categoria cadastrada com sucesso', "Sucesso")
  
           } catch (error: any) {
-             ToastAlerta('Erro ao cadastrar a Categoria', "Erro")
+             toastAlerta('Erro ao cadastrar a Categoria', "Erro")
           }
        }
  

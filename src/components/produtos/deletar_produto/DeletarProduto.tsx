@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { buscar, deletar } from "../../../services/Service"
-import { ToastAlerta } from "../../../utils/ToastAlerta"
 import Produto from "../../../models/Produto"
+import { toastAlerta } from "../../../utils/ToastAlerta"
 
 function DeletarProduto() {
     const [produto, setProduto] = useState<Produto>({} as Produto)
@@ -28,10 +28,10 @@ function DeletarProduto() {
     async function deletarProduto() {
         try {
             await deletar(`/produtos/${id}`)
-            ToastAlerta('Produto apagado com sucesso', "Sucesso")
+            toastAlerta('Produto apagado com sucesso', "Sucesso")
 
         } catch (error) {
-            ToastAlerta('Erro ao apagar o Produto', "Erro")
+            toastAlerta('Erro ao apagar o Produto', "Erro")
         }
 
         retornarManipulação()
