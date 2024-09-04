@@ -4,8 +4,8 @@ import { atualizar, buscar, cadastrar } from "../../../services/Service";
 
 import Categoria from "../../../models/Categoria";
 import Produto from "../../../models/Produto";
-import { ToastAlerta } from "../../../utils/ToastAlerta";
 import { RotatingLines } from "react-loader-spinner";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 
 function FormularioProduto() {
     const navigate = useNavigate();
@@ -22,7 +22,7 @@ function FormularioProduto() {
         try {
             await buscar(`/produtos/${id}`, setProduto)
         } catch (error: any) {
-            alert('Erro ao buscar produtos por ID!')
+            ToastAlerta('Erro ao buscar produtos por ID!', "Erro")
         }
     }
 
@@ -30,7 +30,7 @@ function FormularioProduto() {
         try {
             await buscar(`/categorias/${id}`, setCategoria)
         } catch (error: any) {
-            alert('Erro ao buscar categorias por ID!')
+            ToastAlerta('Erro ao buscar categorias por ID!', "Erro")
         }
     }
 
@@ -38,7 +38,7 @@ function FormularioProduto() {
         try {
             await buscar('/categorias', setCategorias)
         } catch (error: any) {
-            alert('Erro ao buscar categorias!')
+            ToastAlerta('Erro ao buscar categorias!', "Erro")
         }
     }
 
@@ -65,8 +65,8 @@ function FormularioProduto() {
         });
     }
 
-    function retornar() {
-        navigate('/produtos');
+    function retornarManipulação() {
+        navigate('/ManipularProdutos');
     }
 
     async function gerarNovaProduto(e: ChangeEvent<HTMLFormElement>) {
@@ -76,30 +76,30 @@ function FormularioProduto() {
         if (id !== undefined) {
             try {
                 await atualizar(`/produtos`, produto, setProduto);
-                ToastAlerta('Produto atualizada com sucesso', 'Sucesso')
+                ToastAlerta('Produto atualizado com sucesso', 'Sucesso')
 
             } catch (error: any) {
-                ToastAlerta('Erro ao atualizar a Produto', 'Erro')
+                ToastAlerta('Erro ao atualizar o Produto', 'Erro')
             }
 
         } else {
             try {
                 await cadastrar(`/produtos`, produto, setProduto)
-                ToastAlerta('Produto cadastrada com sucesso', 'Sucesso');
+                ToastAlerta('Produto cadastrado com sucesso', 'Sucesso');
 
             } catch (error: any) {
-                ToastAlerta('Erro ao cadastrar a Produto', 'Erro');
+                ToastAlerta('Erro ao cadastrar o Produto', 'Erro');
             }
         }
 
         setIsLoading(false)
-        retornar()
+        retornarManipulação()
     }
 
     const carregandoCategoria = categoria.nome === '';
 
     return (
-        <div className="flex flex-col items-center mx-auto container">
+        <div className="flex flex-col items-center mx-auto bg-cyan-600">
             <h1 className="my-8 text-4xl text-center">
                 {id !== undefined ? 'Editar Produto' : 'Cadastrar Produto'}
             </h1>
@@ -117,6 +117,7 @@ function FormularioProduto() {
                         onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                     />
                 </div>
+
                 <div className="flex flex-col gap-2">
                     <label htmlFor="titulo">Preço do Produto</label>
                     <input
@@ -129,6 +130,20 @@ function FormularioProduto() {
                         onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                     />
                 </div>
+
+                <div className="flex flex-col gap-2">
+                    <label htmlFor="titulo">Foto do produto</label>
+                    <input
+                        type="text"
+                        placeholder="Foto"
+                        name="foto"
+                        required
+                        className="border-2 border-slate-700 p-2 rounded"
+                        value={produto.foto}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+                    />
+                </div>
+
                 <div className="flex flex-col gap-2">
                     <p>Categoria do Produto</p>
                     <select name="categoria" id="categoria" className='border-slate-800 p-2 border rounded'
@@ -144,9 +159,10 @@ function FormularioProduto() {
 
                     </select>
                 </div>
+                <div className="flex justify-center ">
                 <button
                     type='submit'
-                    className='flex justify-center bg-indigo-400 hover:bg-indigo-800 disabled:bg-slate-200 mx-auto py-2 rounded w-1/2 font-bold text-white'
+                    className='flex justify-center bg-green-400 hover:bg-green-600 disabled:bg-red-300 mx-3 mb-6 py-2 rounded w-1/2 font-bold text-white'
                     disabled={carregandoCategoria}
                 >
                     {isLoading ?
@@ -160,6 +176,9 @@ function FormularioProduto() {
                         <span>{id !== undefined ? 'Atualizar' : 'Cadastrar'}</span>
                     }
                 </button>
+
+                <button onClick={retornarManipulação} className='bg-red-400 hover:bg-red-600 mx-3 mb-6 py-2 rounded w-1/2 font-bold text-white' >Cancelar</button>
+                </div>
             </form>
         </div>
     );

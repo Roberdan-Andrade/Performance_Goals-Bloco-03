@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { buscar } from "../../../services/Service";
 import { Triangle } from "react-loader-spinner";
-import CardProdutos from "../card_produtos/CardProdutos";
-import Produto from "../../../models/Produto";
 import { ToastAlerta } from "../../../utils/ToastAlerta";
+import CardProdutosManipular from "../card_produtos/CardProdutosManipular";
+import Produto from "../../../models/Produto";
 
-function ListaProdutos() {
+function ManipularProdutos() {
    const [produtos, setProdutos] = useState<Produto[]>([]);
 
    async function buscarProdutos() {
@@ -43,7 +43,7 @@ function ListaProdutos() {
 
             <div className='container mx-auto py-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
                {produtos.map((produto) => (
-                  <CardProdutos key={produto.id} prod={produto} />
+                  <CardProdutosManipular key={produto.id} prod={produto} />
                ))}
             </div>
          </div>
@@ -51,4 +51,4 @@ function ListaProdutos() {
    );
 }
 
-export default ListaProdutos;
+export default ManipularProdutos;
